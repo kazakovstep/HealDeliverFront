@@ -1,0 +1,24 @@
+.cardRow {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+    .cardRow {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .cardRow {
+        grid-template-columns: repeat(2, 1fr)!important;
+    }
+}
+
+@media (max-width: 600px) {
+    .cardRow {
+        grid-template-columns: 1fr!important;
+    }
+}

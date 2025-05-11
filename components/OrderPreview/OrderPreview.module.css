@@ -1,0 +1,10 @@
+.more{
+    display: flex;
+    justify-content: flex-end;
+}
+.back{
+    color: var(--success) !important
+}
+.back:hover{
+    color: var(--success-dark) !important;
+}

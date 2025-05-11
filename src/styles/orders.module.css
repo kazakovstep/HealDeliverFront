@@ -1,0 +1,25 @@
+.page {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+}
+.table {
+    margin: 0 auto;
+    padding: 1rem;
+    width: 80%;
+    border: 1px solid var(--gray-100);
+    border-radius: 8px;
+}
+.table th:nth-child(1) {
+    width: 15%;
+    text-align: left;
+}
+.table th:nth-child(2), .table th:nth-child(3){
+    width: 30%;
+}
+

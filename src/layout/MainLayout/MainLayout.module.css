@@ -1,0 +1,8 @@
+.account{
+    display: flex;
+    gap: 2rem;
+}
+.page{
+    width:80%;
+    margin: 0 auto;
+}

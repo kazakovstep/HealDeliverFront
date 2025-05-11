@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  webserver:
+    image: httpd:latest
+    platform: linux/amd64
+    ports:
+      - "80:80"
+    volumes:
+      - /Users/stepan/PycharmProjects/eco-market/src/app:/usr/local/apache2/htdocs
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  app:
+    build: /Users/stepan/PycharmProjects/eco-market
+    platform: linux/amd64
+    volumes:
+      - /Users/stepan/PycharmProjects/eco-market:/usr/src/app
+    depends_on:
+      - db
+
+  utility-container:
+    image: busybox
+    command: sleep 1000
+
+volumes:
+  dbdata:

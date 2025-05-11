@@ -1,0 +1,109 @@
+.page {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.titleContainer {
+    display: flex;
+}
+
+.image {
+    height: 20rem;
+    width: 20rem;
+}
+
+.product {
+    display: flex;
+    gap: 5rem;
+}
+.fitnessItem{
+    display: flex;
+    justify-content: space-between;
+}
+.productInfo {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.available {
+    margin: 0 auto;
+    width: fit-content;
+    font-family: var(--font-family);
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: rgba(32, 181, 38, 0.2);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--success-dark);
+}
+
+.unavailable {
+    margin: 0 auto;
+    width: fit-content;
+    font-family: var(--font-family);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    background: rgba(234, 75, 72, 0.2);
+    color: var(--danger);
+}
+
+.fitness {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+}
+
+.green {
+    color: var(--success-dark);
+}
+
+.amount {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid var(--gray-100);
+    border-radius: 170px;
+    padding: 8px;
+    width: 100%;
+}
+
+.amountButton {
+    font-size: 20px;
+    padding: 0.2rem !important;
+    width: 34px;
+    height: 34px;
+}
+
+.likeButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    transition: 300ms;
+    background-image: url("../../public/like.svg");
+}
+
+.likeButton:hover {
+    cursor: pointer;
+    background-image: url("../../public/likeHover.svg");
+}
+
+
+.liked {
+    background-image: url("../../public/likeLiked.svg");
+}

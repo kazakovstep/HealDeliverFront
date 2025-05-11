@@ -1,0 +1,8 @@
+.account{
+    display: flex;
+}
+.account_page{
+    height: 100vh;
+    width: 100vw;
+    background: var(--white);
+}

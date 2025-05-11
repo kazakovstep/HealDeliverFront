@@ -1,0 +1,86 @@
+.card {
+    border: 1px solid var(--gray-100);
+    background: var(--white);
+    transition: 300ms;
+    position: relative;
+    width: 15rem;
+    cursor: pointer;
+}
+
+.card:hover {
+    border: 1px solid var(--success-dark);
+    box-shadow: 0 0 12px 0 rgba(32, 181, 38, 0.32);
+}
+
+.buyInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card:hover .name {
+    color: var(--success-dark);
+}
+
+.buyButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url("../../public/buyButton.svg");
+    transition: 300ms;
+    border: none;
+}
+
+.buyButton:hover {
+    cursor: pointer;
+}
+
+.card:hover .buyButton {
+    background-image: url("../../public/buyButtonHover.svg");
+}
+
+.likeButton {
+    opacity: 0;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    transition: 300ms;
+    background-image: url("../../public/like.svg");
+}
+
+.card:hover .likeButton {
+    visibility: visible;
+    opacity: 1;
+}
+
+.likeButton:hover{
+    cursor: pointer;
+    background-image: url("../../public/likeHover.svg");
+}
+
+
+.liked{
+    visibility: visible;
+    opacity: 1;
+    background-image: url("../../public/likeLiked.svg");
+}
+
+
+.buyed{
+    background-image: url("../../public/buyButtonBuyed.svg");
+}
+.image{
+    width: 100%;
+}
+

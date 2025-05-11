@@ -1,0 +1,149 @@
+.button {
+    font-family: var(--font-family);
+    border-radius: 43px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-weight: 600;
+    gap: 0.6rem;
+    padding: 14px 32px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.small {
+    padding: 10px 24px;
+    font-size: 12px;
+    line-height: 130%;
+}
+
+.medium {
+    padding: 14px 32px;
+    font-size: 14px;
+    line-height: 120%;
+}
+
+.large {
+    padding: 16px 40px;
+    font-size: 16px;
+    line-height: 120%;
+}
+
+.fill {
+    background: var(--success);
+    color: var(--white);
+    transition: 300ms;
+}
+
+.fill:hover {
+    background: var(--success-dark);
+}
+
+.border {
+    background: var(--white);
+    border: 2px solid var(--success);
+    color: var(--success);
+    transition: 300ms;
+}
+
+.border:hover {
+    border: 2px solid var(--success-dark);
+    color: var(--success-dark);
+}
+
+.ghost {
+    background: rgba(86, 172, 89, 0.1);
+    color: var(--success);
+    transition: 300ms;
+}
+
+.ghost:hover {
+    background: rgba(44, 116, 47, 0.2);
+    color: var(--success-dark);
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    transition: 300ms;
+}
+
+.text:hover {
+    color: var(--success);
+}
+.text:active{
+    color: var(--success-dark);
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    gap: 3rem;
+    border-radius: 0;
+    width: 65%;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+    background: var(--success);
+    height: 100%;
+    transition: 300ms;
+}
+.header:hover{
+    background: var(--success-dark);
+}
+.menu {
+    width: 10px;
+    margin-bottom: 37px;
+    margin-left:0;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+.menu span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 2rem;
+    background: var(--white);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+.menu span:nth-child(1) {
+    top: 5px;
+}
+.menu span:nth-child(2),
+.menu span:nth-child(3) {
+    top: 18px;
+}
+.menu span:nth-child(4) {
+    top: 31px;
+}
+.open span:nth-child(1) {
+    top: 18px;
+    width: 0;
+    left: 50%;
+}
+.open span:nth-child(2) {
+    transform: rotate(45deg);
+}
+.open span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+.open span:nth-child(4) {
+    top: 18px;
+    width: 0;
+    left: 50%;
+}

@@ -1,0 +1,17 @@
+.container{
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    border-radius: 0.62rem;
+    align-items: center;
+}
+
+.active{
+    background-color: var(--green-100);
+    color: var(--green-500) !important;
+}
+
+.activeImg{
+    fill: var(--green-500);
+    stroke: var(--green-500);
+}

@@ -1,0 +1,25 @@
+.productInfo{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.img{
+    width: 100px;
+    height: 100px;
+}
+.amount{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid var(--gray-100);
+    border-radius: 170px;
+    padding: 8px;
+    width: 100%;
+}
+.amountButton{
+    font-size: 20px;
+    padding: 0.2rem!important;
+    width: 34px;
+    height: 34px;
+}
