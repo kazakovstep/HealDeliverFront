@@ -6,7 +6,7 @@ import { H } from '../../../../components/Htag/Htag'
 import { useGetAllUsersQuery } from '@/store/api/admin.api'
 import { Button } from '../../../../components/Button/Button'
 import { Input } from '../../../../components/Input/Input'
-import { token, User } from '@/store/api/user.api'
+import { User } from '@/store/api/user.api'
 import { useEffect, useState } from 'react'
 
 function Page() {
@@ -14,6 +14,9 @@ function Page() {
 
 	const [emailStates, setEmailStates] = useState<Array<string>>([])
 	const [usernameStates, setUsernameStates] = useState<Array<string>>([])
+
+	const token =
+		typeof window !== 'undefined' ? window.localStorage.getItem('token') : null
 
 	useEffect(() => {
 		if (users) {
@@ -34,7 +37,7 @@ function Page() {
 			const roleSelect = document.getElementById(
 				`role-${user.id}`
 			) as HTMLSelectElement
-			// await fetch(`http://localhost:8080/admin/users`, {
+			// await fetch(`/admin/users`, {
 			//     method: "PUT",
 			//     headers: {
 			//         "Content-Type": "application/json",
@@ -74,7 +77,7 @@ function Page() {
 
 	const handleDelete = (userId: number, index: number) => {
 		try {
-			fetch(`http://localhost:8080/admin/users/${userId}`, {
+			fetch(`http://localhost:8080/api/admin/users/${userId}`, {
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${token}`,

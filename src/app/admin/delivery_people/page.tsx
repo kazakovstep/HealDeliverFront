@@ -2,14 +2,10 @@
 import styles from '@/styles/users.module.css'
 import { H } from '../../../../components/Htag/Htag'
 import { withAdminLayout } from '@/layout/AdminLayout/AdminLayout'
-import {
-	useGetAllDeliveryPeopleQuery,
-	useGetAllOrdersQuery,
-} from '@/store/api/admin.api'
-import { useEffect } from 'react'
+import { useGetAllDeliveryPeopleQuery } from '@/store/api/admin.api'
 
 function Page() {
-	const { data, isLoading, error } = useGetAllOrdersQuery()
+	const { data, isLoading, error } = useGetAllDeliveryPeopleQuery()
 
 	return (
 		<>
@@ -17,7 +13,7 @@ function Page() {
 				<div className={styles.adminBlock}>
 					<div className={styles.topTable}>
 						<H type={'body'} size={'xl'}>
-							Все заказы
+							Все доставщики
 						</H>
 					</div>
 					<table className={styles.table}>
@@ -30,55 +26,50 @@ function Page() {
 								</th>
 								<th>
 									<H type={'body'} size={'small'}>
-										UserID
+										DeliveryPersonID
 									</H>
 								</th>
 								<th>
 									<H type={'body'} size={'small'}>
-										СТОИМОСТЬ
+										Имя доставщика
 									</H>
 								</th>
 								<th>
 									<H type={'body'} size={'small'}>
-										ДАТА
+										Номер телефона
 									</H>
 								</th>
 								<th>
 									<H type={'body'} size={'small'}>
-										ПРОДУКТЫ
+										Зона ответственности
 									</H>
 								</th>
 							</tr>
-							{data?.map(order => (
-								<tr key={order.id}>
+							{data?.map((person, key) => (
+								<tr key={person.id}>
 									<th>
 										<H type={'body'} size={'small'}>
-											{order?.id}
+											{key}
 										</H>
 									</th>
 									<th>
 										<H type={'body'} size={'small'}>
-											{order?.user.id}
+											{person?.id}
 										</H>
 									</th>
 									<th>
 										<H type={'body'} size={'small'}>
-											{order?.cost}
+											{person?.name}
 										</H>
 									</th>
 									<th>
 										<H type={'body'} size={'small'}>
-											{String(order?.date)}
+											{person?.phone}
 										</H>
 									</th>
 									<th>
 										<H type={'body'} size={'small'}>
-											{order?.orderProducts.map(product => (
-												<>
-													{product?.product.title} x{product?.quantity}
-													<br />
-												</>
-											))}
+											{person?.zone?.name}
 										</H>
 									</th>
 								</tr>

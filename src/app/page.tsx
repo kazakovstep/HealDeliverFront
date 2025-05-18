@@ -33,7 +33,7 @@ function Home() {
 							ДОБРО ПОЖАЛОВАТЬ В HEALDELIVER
 						</H>
 						<H type={'h1'} weight={600}>
-							Свежые & Полезные <br />
+							Доставим быстро <br />
 							Натуральные продукты
 						</H>
 						<div className={styles.saleContainer}>

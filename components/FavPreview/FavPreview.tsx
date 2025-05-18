@@ -14,7 +14,7 @@ export const FavPreview = ({ product }: CardRowProps) => {
 	const [file, setFile] = useState()
 	useEffect(() => {
 		try {
-			fetch(`http://localhost:8080/image/${product.id}`, {
+			fetch(`http://localhost:8080/api/image/${product.id}`, {
 				method: 'POST',
 			})
 				.then(response => response.blob())

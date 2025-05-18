@@ -1,5 +1,5 @@
 import { api, Product } from './api'
-import { token, User } from '@/store/api/user.api'
+import { User } from '@/store/api/user.api'
 
 export interface Order {
 	id: number
@@ -9,20 +9,58 @@ export interface Order {
 	date: Date
 	amount: number
 	deliveryAddress: string
+	deliveryPerson: {
+		name: string
+		phone: string
+	}
 }
 
 export const orderApi = api.injectEndpoints({
 	endpoints: builder => ({
 		getUserOrders: builder.query<Order[], void>({
-			query: () => ({
-				url: `/orders/history`,
-				headers: { Authorization: `Bearer ${token}` },
-			}),
+			query: () => {
+				const token =
+					typeof window !== 'undefined'
+						? window.localStorage.getItem('token')
+						: null
+
+				return {
+					url: 'http://localhost:8080/api/orders/history',
+					headers: token ? { Authorization: `Bearer ${token}` } : {},
+				}
+			},
 		}),
 		getOrderById: builder.query<Order, number>({
-			query: orderId => `/orders/history/${orderId}`,
+			query: orderId => {
+				const token =
+					typeof window !== 'undefined'
+						? window.localStorage.getItem('token')
+						: null
+
+				return {
+					url: `http://localhost:8080/api/orders/history/${orderId}`,
+					headers: token ? { Authorization: `Bearer ${token}` } : {},
+				}
+			},
+		}),
+		getCurrentOrder: builder.query<Order, void>({
+			query: () => {
+				const token =
+					typeof window !== 'undefined'
+						? window.localStorage.getItem('token')
+						: null
+
+				return {
+					url: 'http://localhost:8080/api/orders/current',
+					headers: token ? { Authorization: `Bearer ${token}` } : {},
+				}
+			},
 		}),
 	}),
 })
 
-export const { useGetUserOrdersQuery, useGetOrderByIdQuery } = orderApi
+export const {
+	useGetUserOrdersQuery,
+	useGetOrderByIdQuery,
+	useGetCurrentOrderQuery,
+} = orderApi

@@ -51,7 +51,7 @@ function Page() {
 			(username !== '' || user?.username !== '')
 		) {
 			try {
-				fetch(`http://localhost:8080/user`, {
+				fetch(`http://localhost:8080/api/user`, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',

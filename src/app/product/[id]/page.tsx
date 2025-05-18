@@ -4,7 +4,6 @@ import { withMainLayout } from '@/layout/MainLayout/MainLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { useEffect, useState } from 'react'
-import { token } from '@/store/api/user.api'
 import { actions as FavActions } from '@/store/slices/favourites.slice'
 import {
 	actions as CartAction,
@@ -25,6 +24,9 @@ const Page = ({ params }: { params: { id: number } }) => {
 	const { data } = useGetProductsCartQuery(params.id)
 
 	const [isLiked, setLiked] = useState(false)
+
+	const token =
+		typeof window !== 'undefined' ? window.localStorage.getItem('token') : null
 
 	const handleLike = () => {
 		if (token) {
@@ -71,7 +73,7 @@ const Page = ({ params }: { params: { id: number } }) => {
 			setLiked(true)
 		}
 		try {
-			fetch(`http://localhost:8080/image/${data?.id}`, {
+			fetch(`http://localhost:8080/api/image/${data?.id}`, {
 				method: 'POST',
 			})
 				.then(response => response.blob())

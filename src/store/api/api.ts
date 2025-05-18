@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const BASE_URL = 'http://localhost:8080'
+export const BASE_URL = ''
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -10,7 +10,7 @@ export const api = createApi({
 	}),
 	endpoints: builder => ({
 		getProducts: builder.query<Product[], void>({
-			query: () => '',
+			query: () => 'http://localhost:8080/api/',
 			providesTags: () => [
 				{
 					type: 'Product',

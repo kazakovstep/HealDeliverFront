@@ -18,7 +18,7 @@ export const OrderPage = ({ orderId }: OrderPageProps) => {
 		console.log(order?.orderProducts)
 		if (order && order.orderProducts) {
 			order.orderProducts.forEach(product => {
-				fetch(`http://localhost:8080/image/${product.product.id}`, {
+				fetch(`http://localhost:8080/api/image/${product.product.id}`, {
 					method: 'POST',
 				})
 					.then(response => {
@@ -65,6 +65,18 @@ export const OrderPage = ({ orderId }: OrderPageProps) => {
 					</H>
 					<H type={'body'} size={'small'}>
 						{order?.deliveryAddress}
+					</H>
+					<H type={'body'} size={'small'}>
+						•
+					</H>
+					<H type={'body'} size={'small'}>
+						{order?.deliveryPerson?.name}
+					</H>
+					<H type={'body'} size={'small'}>
+						•
+					</H>
+					<H type={'body'} size={'small'}>
+						{order?.deliveryPerson?.phone}
 					</H>
 				</div>
 				<Link href={'/lk/orders'}>

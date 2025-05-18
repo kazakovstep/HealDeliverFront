@@ -11,11 +11,13 @@ import { H } from '../Htag/Htag'
 import { Rating } from '../Rating/Rating'
 import styles from './Card.module.css'
 import { CardProps } from './Card.props'
-import { token } from '@/store/api/user.api'
 import Link from 'next/link'
 
 export const Card = ({ data, ...props }: CardProps) => {
 	const [isLiked, setLiked] = useState(false)
+
+	const token =
+		typeof window !== 'undefined' ? window.localStorage.getItem('token') : null
 
 	const handleLike = () => {
 		if (token) {
@@ -61,7 +63,7 @@ export const Card = ({ data, ...props }: CardProps) => {
 			setLiked(true)
 		}
 		try {
-			fetch(`http://localhost:8080/image/${data.id}`, {
+			fetch(`http://localhost:8080/api/image/${data.id}`, {
 				method: 'POST',
 			})
 				.then(response => response.blob())

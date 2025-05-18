@@ -18,6 +18,7 @@ import {
 	AddressAutocomplete,
 	TAddress,
 } from '../../../../components/AddressAutovomplete/AddressAutocomplete'
+import { useRouter } from 'next/navigation'
 
 const DADATA_API_KEY = '2072d903d0714cedae57d652027fb6a8ede97d2e'
 
@@ -47,6 +48,8 @@ function Page() {
 	const products = useSelector((s: RootState) => s.products)
 	const quantities = useSelector((s: RootState) => s.cart?.quantities || {})
 
+	const router = useRouter()
+
 	// Общее количество товаров
 	const totalAmount = useMemo(
 		() => products.reduce((sum, p) => sum + (quantities[p.id] || 0), 0),
@@ -60,7 +63,7 @@ function Page() {
 	)
 
 	const userId = useGetCurrentUserQuery().data?.id
-	const [address, setAddress] = useState<TAddress>({
+	const [address, setAddress] = useState<any>({
 		value: '',
 		unrestricted_value: null,
 		data: null,
@@ -68,7 +71,7 @@ function Page() {
 
 	// Отправка заказа
 	const handleBuy = () => {
-		fetch('http://localhost:8080/orders', {
+		fetch('http://localhost:8080/api/orders', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -78,12 +81,15 @@ function Page() {
 				amount: totalAmount,
 				quantities,
 				deliveryAddress: address.value,
+				deliveryLatitude: address.data.geo_lat,
+				deliveryLongitude: address.data.geo_lon,
 			}),
 		})
 			.then(r => {
 				if (r.ok) {
 					dispatch(CartActions.removeAll())
 					dispatch(ProductActions.removeAll())
+					router.replace('/orders/current/preview')
 				}
 			})
 			.catch(console.log)
@@ -131,6 +137,7 @@ function Page() {
 					const json = await res.json()
 					if (json.suggestions?.length) {
 						const s = json.suggestions[0]
+						console.log(s)
 						setAddress({
 							value: s.value,
 							unrestricted_value: s.unrestricted_value,
@@ -162,6 +169,7 @@ function Page() {
 						const ipJson = await ipRes.json()
 						if (ipJson.location) {
 							const s = ipJson.location
+							console.log(ipJson)
 							setAddress({
 								value: s.value,
 								unrestricted_value: s.unrestricted_value,
