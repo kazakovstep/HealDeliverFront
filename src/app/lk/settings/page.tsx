@@ -8,6 +8,7 @@ import { useGetCurrentUserQuery } from '@/store/api/user.api'
 import { Button } from '../../../../components/Button/Button'
 import { useEffect, useState } from 'react'
 import { signOut } from 'next-auth/react'
+import { ProtectedRoute } from '@/components/ProtectedRoute/ProtectedRoute'
 
 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 const passwordRegex: RegExp =
@@ -51,7 +52,7 @@ function Page() {
 			(username !== '' || user?.username !== '')
 		) {
 			try {
-				fetch(`http://localhost:8080/api/user`, {
+				fetch(`/api/user`, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
@@ -78,59 +79,61 @@ function Page() {
 	}
 
 	return (
-		<div className={styles.page}>
-			<H type={'h5'} weight={400}>
-				Настройка аккаунта
-			</H>
-			<div className={styles.form}>
-				<div className={styles.input}>
-					<H type={'body'} size={'small'}>
-						Имя пользователя
-					</H>
-					<Input
-						state={usernameState}
-						value={username || user?.username}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setUsername(e.target.value)
-						}
-					/>
+		<ProtectedRoute>
+			<div className={styles.page}>
+				<H type={'h5'} weight={400}>
+					Настройка аккаунта
+				</H>
+				<div className={styles.form}>
+					<div className={styles.input}>
+						<H type={'body'} size={'small'}>
+							Имя пользователя
+						</H>
+						<Input
+							state={usernameState}
+							value={username || user?.username}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setUsername(e.target.value)
+							}
+						/>
+					</div>
+					<div className={styles.input}>
+						<H type={'body'} size={'small'}>
+							Электронная почта
+						</H>
+						<Input
+							state={emailState}
+							value={email || user?.email}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setEmail(e.target.value)
+							}
+						/>
+					</div>
+					<div className={styles.input}>
+						<H type={'body'} size={'small'}>
+							Новый пароль
+						</H>
+						<Input
+							state={passwordState}
+							type={'password'}
+							value={password}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setPassword(e.target.value)
+							}
+						/>
+					</div>
 				</div>
-				<div className={styles.input}>
-					<H type={'body'} size={'small'}>
-						Электронная почта
-					</H>
-					<Input
-						state={emailState}
-						value={email || user?.email}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setEmail(e.target.value)
-						}
-					/>
-				</div>
-				<div className={styles.input}>
-					<H type={'body'} size={'small'}>
-						Новый пароль
-					</H>
-					<Input
-						state={passwordState}
-						type={'password'}
-						value={password}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setPassword(e.target.value)
-						}
-					/>
+				<div className={styles.buttons}>
+					<span></span>
+					<Button type={'fill'} onClick={handleUpdate}>
+						Сохранить
+					</Button>
+					<Button type={'border'} onClick={handleLogout}>
+						Выйти из аккаунта
+					</Button>
 				</div>
 			</div>
-			<div className={styles.buttons}>
-				<span></span>
-				<Button type={'fill'} onClick={handleUpdate}>
-					Сохранить
-				</Button>
-				<Button type={'border'} onClick={handleLogout}>
-					Выйти из аккаунта
-				</Button>
-			</div>
-		</div>
+		</ProtectedRoute>
 	)
 }
 

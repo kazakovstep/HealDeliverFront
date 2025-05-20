@@ -185,7 +185,7 @@ export default function SaveProduct() {
 		formData.append('proteins', String(proteins))
 		formData.append('image', String(image.substring(image.indexOf('/9'))))
 
-		fetch('http://localhost:8080/api/product/create', {
+		fetch('/api/product/create', {
 			method: 'POST',
 			body: formData,
 		})

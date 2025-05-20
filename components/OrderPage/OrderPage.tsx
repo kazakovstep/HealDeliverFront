@@ -18,7 +18,7 @@ export const OrderPage = ({ orderId }: OrderPageProps) => {
 		console.log(order?.orderProducts)
 		if (order && order.orderProducts) {
 			order.orderProducts.forEach(product => {
-				fetch(`http://localhost:8080/api/image/${product.product.id}`, {
+				fetch(`/api/image/${product.product.id}`, {
 					method: 'POST',
 				})
 					.then(response => {

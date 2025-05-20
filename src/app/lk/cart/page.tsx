@@ -71,7 +71,7 @@ function Page() {
 
 	// Отправка заказа
 	const handleBuy = () => {
-		fetch('http://localhost:8080/api/orders', {
+		fetch('/api/orders', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({

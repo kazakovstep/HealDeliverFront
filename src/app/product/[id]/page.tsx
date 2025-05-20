@@ -73,7 +73,7 @@ const Page = ({ params }: { params: { id: number } }) => {
 			setLiked(true)
 		}
 		try {
-			fetch(`http://localhost:8080/api/image/${data?.id}`, {
+			fetch(`/api/image/${data?.id}`, {
 				method: 'POST',
 			})
 				.then(response => response.blob())

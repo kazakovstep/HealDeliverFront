@@ -5,7 +5,7 @@ export const productApi = api.injectEndpoints({
 		createProduct: builder.mutation({
 			query: product => ({
 				body: product,
-				url: 'http://localhost:8080/api',
+				url: '/api',
 				method: 'POST',
 			}),
 			invalidatesTags: () => [
@@ -16,7 +16,7 @@ export const productApi = api.injectEndpoints({
 		}),
 		getImageById: builder.mutation({
 			query: id => ({
-				url: `http://localhost:8080/api/image/${id}`,
+				url: `/api/image/${id}`,
 				method: 'POST',
 			}),
 			invalidatesTags: () => [
@@ -26,10 +26,10 @@ export const productApi = api.injectEndpoints({
 			],
 		}),
 		getProductsCart: builder.query<Product, number>({
-			query: id => `http://localhost:8080/api/product?id=${id}`,
+			query: id => `/api/product?id=${id}`,
 		}),
 		getProductsByTitle: builder.query<Product[], string>({
-			query: title => `http://localhost:8080/api/?title=${title}`,
+			query: title => `/api/?title=${title}`,
 		}),
 		getProductsByCategory: builder.query<Product[], string>({
 			query: category => `/api/${category}`,

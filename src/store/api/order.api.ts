@@ -25,7 +25,7 @@ export const orderApi = api.injectEndpoints({
 						: null
 
 				return {
-					url: 'http://localhost:8080/api/orders/history',
+					url: '/api/orders/history',
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},
@@ -38,7 +38,7 @@ export const orderApi = api.injectEndpoints({
 						: null
 
 				return {
-					url: `http://localhost:8080/api/orders/history/${orderId}`,
+					url: `/api/orders/history/${orderId}`,
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},
@@ -51,7 +51,7 @@ export const orderApi = api.injectEndpoints({
 						: null
 
 				return {
-					url: 'http://localhost:8080/api/orders/current',
+					url: '/api/orders/current',
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},

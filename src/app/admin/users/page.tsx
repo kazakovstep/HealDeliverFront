@@ -77,7 +77,7 @@ function Page() {
 
 	const handleDelete = (userId: number, index: number) => {
 		try {
-			fetch(`http://localhost:8080/api/admin/users/${userId}`, {
+			fetch(`/api/admin/users/${userId}`, {
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${token}`,

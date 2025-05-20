@@ -10,7 +10,7 @@ export const api = createApi({
 	}),
 	endpoints: builder => ({
 		getProducts: builder.query<Product[], void>({
-			query: () => 'http://localhost:8080/api/',
+			query: () => '/api/',
 			providesTags: () => [
 				{
 					type: 'Product',

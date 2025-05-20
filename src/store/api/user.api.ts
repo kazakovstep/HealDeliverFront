@@ -21,7 +21,7 @@ export const userApi = api.injectEndpoints({
 						: null
 
 				return {
-					url: `http://localhost:8080/api/user`,
+					url: `/api/user`,
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},

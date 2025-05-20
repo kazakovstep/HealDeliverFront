@@ -38,7 +38,7 @@ export default function Login() {
 			(passwordRegex.test(password) || password === 'admin')
 		) {
 			try {
-				fetch(`http://localhost:8080/api/auth`, {
+				fetch(`/api/auth`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

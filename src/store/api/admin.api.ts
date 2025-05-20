@@ -11,7 +11,7 @@ export const adminApi = api.injectEndpoints({
 						? window.localStorage.getItem('token')
 						: null
 				return {
-					url: 'http://localhost:8080/api/admin/users',
+					url: '/api/admin/users',
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},
@@ -23,7 +23,7 @@ export const adminApi = api.injectEndpoints({
 						? window.localStorage.getItem('token')
 						: null
 				return {
-					url: 'http://localhost:8080/api/admin/orders',
+					url: '/api/admin/orders',
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},
@@ -35,7 +35,7 @@ export const adminApi = api.injectEndpoints({
 						? window.localStorage.getItem('token')
 						: null
 				return {
-					url: 'http://localhost:8080/api/admin/delivery_person',
+					url: '/api/admin/delivery_person',
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},

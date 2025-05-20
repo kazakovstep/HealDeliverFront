@@ -13,7 +13,7 @@ export const CartPreview = ({ index, product }: CardRowProps) => {
 	const [file, setFile] = useState()
 	useEffect(() => {
 		try {
-			fetch(`http://localhost:8080/api/image/${product.id}`, {
+			fetch(`/api/image/${product.id}`, {
 				method: 'POST',
 			})
 				.then(response => response.blob())
