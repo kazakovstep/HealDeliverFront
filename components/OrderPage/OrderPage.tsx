@@ -139,7 +139,10 @@ export const OrderPage = ({ orderId }: OrderPageProps) => {
 								</H>
 							</th>
 							<th>
-								<Link href={`/product/${product.id}`} className={styles.more}>
+								<Link
+									href={`/product/${product.product.id}`}
+									className={styles.more}
+								>
 									<Button type={'text'} className={cn(styles.back)}>
 										К продукту
 									</Button>
