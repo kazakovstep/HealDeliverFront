@@ -43,15 +43,17 @@ export const orderApi = api.injectEndpoints({
 				}
 			},
 		}),
-		getCurrentOrder: builder.query<Order, void>({
-			query: () => {
+		getCurrentOrder: builder.query<Order, number>({
+			query: userId => {
 				const token =
 					typeof window !== 'undefined'
 						? window.localStorage.getItem('token')
 						: null
 
 				return {
-					url: '/api/orders/current',
+					url: `/api/orders/current`,
+					method: 'GET',
+					params: { userId },
 					headers: token ? { Authorization: `Bearer ${token}` } : {},
 				}
 			},

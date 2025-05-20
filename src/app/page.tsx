@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { withMainLayout } from '@/layout/MainLayout/MainLayout'
 import { useSession } from 'next-auth/react'
 import { ProtectedRoute } from '@/components/ProtectedRoute/ProtectedRoute'
+import Image from 'next/image'
 
 const Products = [
 	{ category: 'Фрукты', type: 'fruit' },
@@ -45,18 +46,30 @@ function Home() {
 							</div>
 							<Button type={'fill'} size={'medium'} className={styles.buy}>
 								Оформить заказ
-								<img src={'../whiteArrow.svg'} alt={'whiteArrow'} />
+								<Image
+									src='/whiteArrow.svg'
+									alt='whiteArrow'
+									width={24}
+									height={24}
+								/>
 							</Button>
 						</div>
-						<img
+						<Image
 							className={styles.firstContainerImg}
-							src={'../firstLanding.svg'}
-							alt={'firstLanding'}
+							src='/firstLanding.svg'
+							alt='firstLanding'
+							width={500}
+							height={500}
 						/>
 					</div>
 					<div className={styles.bottomContainer}>
 						<div className={styles.bottomItem}>
-							<img src={'../shipping.svg'} alt={'shipping'} />
+							<Image
+								src='/shipping.svg'
+								alt='shipping'
+								width={48}
+								height={48}
+							/>
 							<div className={styles.bottomWords}>
 								<H type={'body'} size={'small'} weight={600}>
 									Быстрая доставка
@@ -67,7 +80,7 @@ function Home() {
 							</div>
 						</div>
 						<div className={styles.bottomItem}>
-							<img src={'../support.svg'} alt={'support'} />
+							<Image src='/support.svg' alt='support' width={48} height={48} />
 							<div className={styles.bottomWords}>
 								<H type={'body'} size={'small'} weight={600}>
 									Поддержка клиентов 24/7
@@ -78,7 +91,7 @@ function Home() {
 							</div>
 						</div>
 						<div className={styles.bottomItem}>
-							<img src={'../payment.svg'} alt={'payment'} />
+							<Image src='/payment.svg' alt='payment' width={48} height={48} />
 							<div className={styles.bottomWords}>
 								<H type={'body'} size={'small'} weight={600}>
 									100% Безопасный платеж
@@ -89,7 +102,12 @@ function Home() {
 							</div>
 						</div>
 						<div className={styles.bottomItem}>
-							<img src={'../moneyBack.svg'} alt={'moneyBack'} />
+							<Image
+								src='/moneyBack.svg'
+								alt='moneyBack'
+								width={48}
+								height={48}
+							/>
 							<div className={styles.bottomWords}>
 								<H type={'body'} size={'small'} weight={600}>
 									Гарантия возврата денег

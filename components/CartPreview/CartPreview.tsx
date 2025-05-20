@@ -35,26 +35,53 @@ export const CartPreview = ({ index, product }: CardRowProps) => {
 	const dispatch = useDispatch()
 
 	const handleMinus = () => {
-		if (arr[index] != 1) {
-			dispatch(CartActions.removeFromCartSum(product.price))
-			dispatch(CartActions.updateQuantity({ index, amount: arr[index] - 1 }))
+		if (arr[product.id] != 1) {
+			dispatch(
+				CartActions.removeFromCartSum({
+					price: product.price,
+					productId: product.id,
+				})
+			)
+			dispatch(
+				CartActions.updateQuantity({
+					productId: product.id,
+					amount: arr[product.id] - 1,
+				})
+			)
 		}
-		if (arr[index] == 1) {
-			dispatch(CartActions.removeFromCart(product.price))
+		if (arr[product.id] == 1) {
+			dispatch(
+				CartActions.removeFromCart({
+					price: product.price,
+					productId: product.id,
+				})
+			)
 			dispatch(ProductActions.toggleCart(product))
-			dispatch(CartActions.deleteQuantity(index))
+			dispatch(CartActions.deleteQuantity({ productId: product.id }))
 		}
 	}
 
 	const handlePlus = () => {
-		dispatch(CartActions.addToCartSum(product.price))
-		dispatch(CartActions.updateQuantity({ index, amount: arr[index] + 1 }))
+		dispatch(
+			CartActions.addToCartSum({ price: product.price, productId: product.id })
+		)
+		dispatch(
+			CartActions.updateQuantity({
+				productId: product.id,
+				amount: arr[product.id] + 1,
+			})
+		)
 	}
 
 	const handleDelete = () => {
-		dispatch(CartActions.removeFromCart(product.price * arr[index]))
+		dispatch(
+			CartActions.removeFromCart({
+				price: product.price * arr[product.id],
+				productId: product.id,
+			})
+		)
 		dispatch(ProductActions.toggleCart(product))
-		dispatch(CartActions.deleteQuantity(index))
+		dispatch(CartActions.deleteQuantity({ productId: product.id }))
 	}
 
 	return (
@@ -82,7 +109,7 @@ export const CartPreview = ({ index, product }: CardRowProps) => {
 						-
 					</Button>
 					<H type='body' size='medium'>
-						{arr[index]}
+						{arr[product.id]}
 					</H>
 					<Button
 						type={'fill'}
@@ -95,7 +122,7 @@ export const CartPreview = ({ index, product }: CardRowProps) => {
 			</th>
 			<th>
 				<H type='body' size='medium'>
-					{product.price * arr[index]} руб.
+					{product.price * arr[product.id]} руб.
 				</H>
 			</th>
 			<th>

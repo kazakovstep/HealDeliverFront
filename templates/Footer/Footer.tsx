@@ -3,6 +3,7 @@ import cn from 'classnames'
 import styles from './Footer.module.css'
 import { Logo } from '../../components/Logo/Logo'
 import { H } from '../../components/Htag/Htag'
+import Image from 'next/image'
 
 export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
 	return (
@@ -19,10 +20,12 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
 				</H>
 			</div>
 			<div className={styles.rightSide}>
-				<img
+				<Image
 					className={styles.leftFooter}
-					src={'../leftFooter.svg'}
-					alt={'leftFooter'}
+					src='/leftFooter.svg'
+					alt='leftFooter'
+					width={300}
+					height={300}
 				/>
 				<H type={'body'} size={'large'} className={styles.h}>
 					Мой аккаунт
@@ -36,10 +39,12 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
 				<H type={'body'} size={'large'} className={styles.h}>
 					О нас
 				</H>
-				<img
+				<Image
 					className={styles.rightFooter}
-					src={'../rightFooter.svg'}
-					alt={'rightFooter'}
+					src='/rightFooter.svg'
+					alt='rightFooter'
+					width={300}
+					height={300}
 				/>
 			</div>
 		</footer>

@@ -50,9 +50,13 @@ const Page = ({ params }: { params: { id: number } }) => {
 
 	const handleBuy = () => {
 		if (isBuy) {
-			dispatch(CartAction.removeFromCart(data?.price))
+			dispatch(
+				CartAction.removeFromCart({ price: data?.price, productId: data?.id })
+			)
 		} else {
-			dispatch(CartAction.addToCart(data?.price))
+			dispatch(
+				CartAction.addToCart({ price: data?.price, productId: data?.id })
+			)
 		}
 		setBuy(!isBuy)
 		dispatch(ProductAction.toggleCart(data))

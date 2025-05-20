@@ -11,16 +11,20 @@ import { Input } from '../../../../components/Input/Input'
 import { Button } from '../../../../components/Button/Button'
 import { actions as CartActions } from '../../../store/slices/cart.slice'
 import { actions as ProductActions } from '../../../store/slices/products.slice'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { useGetCurrentUserQuery } from '@/store/api/user.api'
 
 function PaymentPage() {
 	const router = useRouter()
+	const dispatch = useDispatch()
 	const searchParams = useSearchParams()
 	const products = useSelector((s: RootState) => s.products)
 	const quantities = useSelector((s: RootState) => s.cart?.quantities || {})
-	const { data: order } = useGetCurrentOrderQuery()
+	const userId = useGetCurrentUserQuery().data?.id
+	const order = useGetCurrentOrderQuery(Number(userId), {
+		skip: !userId,
+	})
 	const [cardNumber, setCardNumber] = useState('')
 	const [cvv, setCvv] = useState('')
 	const [cardholderName, setCardholderName] = useState('')
@@ -42,8 +46,6 @@ function PaymentPage() {
 			products.reduce((sum, p) => sum + p.price * (quantities[p.id] || 0), 0),
 		[products, quantities]
 	)
-
-	const userId = useGetCurrentUserQuery().data?.id
 
 	useEffect(() => {
 		if (!order) {
@@ -88,6 +90,33 @@ function PaymentPage() {
 		return groups.join(' ')
 	}
 
+	const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+		// Разрешаем только цифры
+		const inputValue = e.target.value.replace(/[^\d]/g, '')
+
+		// Форматируем номер карты, добавляя пробелы после каждых 4 цифр
+		const formattedValue = inputValue.replace(/(\d{4})(?=\d)/g, '$1 ').trim()
+
+		// Проверяем длину после форматирования
+		if (inputValue.length > 16) return
+
+		setCardNumber(formattedValue)
+		setErrors(prev => ({ ...prev, cardNumber: '' }))
+	}
+
+	const handleCvvChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value.replace(/\D/g, '')
+		if (inputValue.length > 3) return
+		setCvv(inputValue)
+		setErrors(prev => ({ ...prev, cvv: '' }))
+	}
+
+	const handleCardholderNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value.toUpperCase().slice(0, 20)
+		setCardholderName(value)
+		setErrors(prev => ({ ...prev, cardholderName: '' }))
+	}
+
 	const validateForm = () => {
 		const newErrors = {
 			cardNumber: '',
@@ -95,8 +124,13 @@ function PaymentPage() {
 			cardholderName: '',
 		}
 
-		// Валидация номера карты (16 цифр)
-		if (cardNumber.replace(/\s/g, '').length !== 16) {
+		// Валидация номера карты (16 цифр, без учета пробелов)
+		if (
+			cardNumber.replace(
+				/[\s\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/g,
+				''
+			).length !== 16
+		) {
 			newErrors.cardNumber = 'Номер карты должен содержать 16 цифр'
 		}
 
@@ -124,7 +158,7 @@ function PaymentPage() {
 					productIds: products.map(p => p.id),
 					cost: totalPrice,
 					amount: totalAmount,
-					quantities,
+					quantities: Object.values(quantities),
 					deliveryAddress: address.value,
 					deliveryLatitude: address.latitude,
 					deliveryLongitude: address.longitude,
@@ -166,7 +200,7 @@ function PaymentPage() {
 					<div className={styles.orderSummary}>
 						<H type={'h5'}>Сумма к оплате</H>
 						<H type={'h3'} className={styles.total}>
-							{order.cost} руб.
+							{totalPrice} руб.
 						</H>
 					</div>
 
@@ -177,12 +211,9 @@ function PaymentPage() {
 							</H>
 							<Input
 								value={cardNumber}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => {
-									const value = e.target.value.replace(/\D/g, '').slice(0, 16)
-									setCardNumber(formatCardNumber(value))
-									setErrors(prev => ({ ...prev, cardNumber: '' }))
-								}}
+								onChange={handleCardNumberChange}
 								placeholder='XXXX XXXX XXXX XXXX'
+								maxLength={19}
 							/>
 							{errors.cardNumber && (
 								<H type={'body'} size={'small'} className={styles.error}>
@@ -198,13 +229,10 @@ function PaymentPage() {
 								</H>
 								<Input
 									value={cvv}
-									onChange={(e: ChangeEvent<HTMLInputElement>) => {
-										const value = e.target.value.replace(/\D/g, '').slice(0, 3)
-										setCvv(value)
-										setErrors(prev => ({ ...prev, cvv: '' }))
-									}}
+									onChange={handleCvvChange}
 									placeholder='•••'
 									type='password'
+									maxLength={3}
 								/>
 								{errors.cvv && (
 									<H type={'body'} size={'small'} className={styles.error}>
@@ -219,11 +247,7 @@ function PaymentPage() {
 								</H>
 								<Input
 									value={cardholderName}
-									onChange={(e: ChangeEvent<HTMLInputElement>) => {
-										const value = e.target.value.toUpperCase().slice(0, 20)
-										setCardholderName(value)
-										setErrors(prev => ({ ...prev, cardholderName: '' }))
-									}}
+									onChange={handleCardholderNameChange}
 									placeholder='JOHN DOE'
 								/>
 								{errors.cardholderName && (
@@ -239,7 +263,7 @@ function PaymentPage() {
 							className={styles.payButton}
 							onClick={handlePayment}
 						>
-							Оплатить {order.cost} руб.
+							Оплатить {totalPrice} руб.
 						</Button>
 					</div>
 				</div>
@@ -249,6 +273,3 @@ function PaymentPage() {
 }
 
 export default withMainLayout(PaymentPage)
-function dispatch(arg0: any) {
-	throw new Error('Function not implemented.')
-}

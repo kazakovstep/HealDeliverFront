@@ -1,49 +1,54 @@
 .footer {
-    position: relative;
-    background: var(--green-900);
-    width: 100%;
-    padding: 5rem 10rem;
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
+	position: relative;
+	background: var(--green-900);
+	width: 100%;
+	padding: 5rem 10rem;
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
 }
 
-.leftSide, .rightSide {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: justify;
-    gap: 1rem;
+.leftSide,
+.rightSide {
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: justify;
+	gap: 1rem;
 }
 
 .rightSide {
-    align-items: flex-end;
+	align-items: flex-end;
 }
 
 .h {
-    z-index: 1;
-    color: var(--green-300) !important;
-    transition: 300ms;
+	z-index: 1;
+	color: var(--green-300) !important;
+	transition: 300ms;
 }
 
 .h:hover {
-    color: var(--success);
-    cursor: pointer;
+	color: var(--success);
+	cursor: pointer;
 }
 
-.rightFooter, .leftFooter {
-    position: absolute;
+.rightFooter,
+.leftFooter {
+	position: absolute;
+	z-index: 0;
 }
 
 .rightFooter {
-    right: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .leftFooter {
-    left: 0;
+	left: 0;
+	bottom: 0;
 }
 
 .logo h4 {
-    color: var(--green-300) !important;
+	color: var(--green-300) !important;
 }

@@ -6,9 +6,13 @@ import { ProtectedRoute } from '@/components/ProtectedRoute/ProtectedRoute'
 import styles from './preview.module.css'
 import { H } from '../../../../../components/Htag/Htag'
 import { useEffect, useState } from 'react'
+import { useGetCurrentUserQuery } from '@/store/api/user.api'
 
 function PreviewPage() {
-	const { data: order, isLoading } = useGetCurrentOrderQuery()
+	const userId = useGetCurrentUserQuery().data?.id
+	const { data: order, isLoading } = useGetCurrentOrderQuery(Number(userId), {
+		skip: !userId,
+	})
 
 	if (isLoading) {
 		return <div>Загрузка...</div>

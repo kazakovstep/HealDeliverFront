@@ -35,9 +35,13 @@ export const Card = ({ data, ...props }: CardProps) => {
 	const handleBuy = () => {
 		if (token) {
 			if (isBuyed) {
-				dispatch(CartActions.removeFromCart(data.price))
+				dispatch(
+					CartActions.removeFromCart({ price: data.price, productId: data.id })
+				)
 			} else {
-				dispatch(CartActions.addToCart(data.price))
+				dispatch(
+					CartActions.addToCart({ price: data.price, productId: data.id })
+				)
 			}
 			setBuyed(!isBuyed)
 			dispatch(ProductActions.toggleCart(data))

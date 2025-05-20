@@ -18,11 +18,16 @@ interface IProps {
 const API_KEY = '2072d903d0714cedae57d652027fb6a8ede97d2e'
 
 export const AddressAutocomplete: FC<IProps> = ({ value, onChange }) => {
-	console.log(value)
 	return (
 		<div style={{ width: 300 }}>
-			{/*//@ts-ignore*/}
-			<AddressSuggestions token={API_KEY} value={value} onChange={onChange} />
+			<AddressSuggestions
+				token={API_KEY}
+				value={value}
+				//@ts-ignore
+				onChange={onChange}
+				filterLocations={[{ country: 'Россия', city: 'Москва' }]}
+				locations={[{ country: 'Россия', city: 'Москва' }]}
+			/>
 		</div>
 	)
 }
