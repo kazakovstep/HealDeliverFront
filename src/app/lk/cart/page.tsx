@@ -44,7 +44,6 @@ function haversineDistance(
 }
 
 function Page() {
-	const dispatch = useDispatch()
 	const products = useSelector((s: RootState) => s.products)
 	const quantities = useSelector((s: RootState) => s.cart?.quantities || {})
 
@@ -71,28 +70,16 @@ function Page() {
 
 	// Отправка заказа
 	const handleBuy = () => {
-		fetch('/api/orders', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				userId,
-				productIds: products.map(p => p.id),
-				cost: totalPrice,
-				amount: totalAmount,
-				quantities,
-				deliveryAddress: address.value,
-				deliveryLatitude: address.data.geo_lat,
-				deliveryLongitude: address.data.geo_lon,
-			}),
-		})
-			.then(r => {
-				if (r.ok) {
-					dispatch(CartActions.removeAll())
-					dispatch(ProductActions.removeAll())
-					router.replace('/orders/current/preview')
-				}
-			})
-			.catch(console.log)
+		if (address.value) {
+			const addressData = encodeURIComponent(
+				JSON.stringify({
+					value: address.value,
+					latitude: address.data.geo_lat,
+					longitude: address.data.geo_lon,
+				})
+			)
+			router.replace(`/orders/payment?address=${addressData}`)
+		}
 	}
 
 	// Координаты склада (пример: Москва)
